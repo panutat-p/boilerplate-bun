@@ -14,5 +14,5 @@ curl -fsSL https://bun.sh/install | bash
 
 ## Docs
 
-* https://bun.sh/docs/cli/init
-* https://bun.sh/docs/cli/add
+- https://bun.sh/docs/cli/init
+- https://bun.sh/docs/cli/add

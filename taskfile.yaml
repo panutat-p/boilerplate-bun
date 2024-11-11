@@ -3,6 +3,7 @@ version: '3'
 tasks:
   install:
     cmds:
+      - npm i -g prettier
       - bun install
 
   lint:
@@ -11,4 +12,4 @@ tasks:
 
   dev:
     cmds:
-      - bun run main.ts
+      - bun run src/main.ts
