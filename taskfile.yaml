@@ -1,0 +1,14 @@
+version: '3'
+
+tasks:
+  install:
+    cmds:
+      - bun install
+
+  lint:
+    cmds:
+      - prettier --write .
+
+  dev:
+    cmds:
+      - bun run main.ts
