@@ -12,4 +12,4 @@ tasks:
 
   dev:
     cmds:
-      - bun run src/main.ts
+      - bun run cmd/main.ts

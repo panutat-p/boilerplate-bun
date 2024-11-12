@@ -16,3 +16,10 @@ curl -fsSL https://bun.sh/install | bash
 
 - https://bun.sh/docs/cli/init
 - https://bun.sh/docs/cli/add
+
+## Packages
+
+```sh
+bun add luxon
+bun add -D @types/luxon
+```
