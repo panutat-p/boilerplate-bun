@@ -22,4 +22,6 @@ curl -fsSL https://bun.sh/install | bash
 ```sh
 bun add luxon
 bun add -D @types/luxon
+bun add drizzle-orm mysql2
+bun add -D drizzle-kit
 ```
