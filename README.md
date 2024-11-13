@@ -25,3 +25,9 @@ bun add -D @types/luxon
 bun add drizzle-orm mysql2
 bun add -D drizzle-kit
 ```
+
+## SQL
+
+* https://github.com/drizzle-team/drizzle-orm
+* https://github.com/knex/knex
+* https://github.com/kysely-org/kysely
