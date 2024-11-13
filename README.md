@@ -31,3 +31,7 @@ bun add -D drizzle-kit
 * https://github.com/drizzle-team/drizzle-orm
 * https://github.com/knex/knex
 * https://github.com/kysely-org/kysely
+
+## Drizzle is not typed safe query
+
+* https://github.com/thetutlage/meta/discussions/8
