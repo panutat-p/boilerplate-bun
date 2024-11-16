@@ -1,20 +1,29 @@
 import mysql from 'mysql2/promise'
 import { drizzle } from 'drizzle-orm/mysql2'
+import { fruit as fruitTable } from '../src/db/schema'
 
 const conn = await mysql.createConnection({
   host: 'localhost',
   port: 3306,
   user: 'root',
   password: 'password',
-  database: 'poc',
+  database: 'demo',
 })
 console.info('👉 DB connected')
 
 const db = drizzle({ client: conn })
 
-const res = await db.execute(`SELECT * FROM fruit`)
-console.info(res[0])
+const fruit: typeof fruitTable.$inferInsert = {
+  name: 'apple',
+  color: 'red',
+  quantity: 4,
+}
+
+await db.insert(fruitTable).values(fruit)
+console.info('👉 Inserted a fruit:', fruit)
+
+const rows = await db.select().from(fruitTable)
+console.info('👉 All fruits:', rows)
 
 await conn.end()
 console.info('👉 DB closed')
-process.exit(0)

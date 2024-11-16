@@ -3,8 +3,12 @@ version: '3'
 tasks:
   install:
     cmds:
-      - npm i -g prettier
+      - bun add -g prettier
       - bun install
+
+  drizzle:
+    cmds:
+      - bunx drizzle-kit pull --config db/drizzle.config.ts
 
   lint:
     cmds:

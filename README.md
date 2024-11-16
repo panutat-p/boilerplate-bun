@@ -28,10 +28,17 @@ bun add -D drizzle-kit
 
 ## SQL
 
-* https://github.com/drizzle-team/drizzle-orm
-* https://github.com/knex/knex
-* https://github.com/kysely-org/kysely
+- https://github.com/drizzle-team/drizzle-orm
+- https://github.com/knex/knex
+- https://github.com/kysely-org/kysely
 
-## Drizzle is not typed safe query
+## Drizzle
 
-* https://github.com/thetutlage/meta/discussions/8
+- https://orm.drizzle.team/docs/get-started/mysql-existing
+- Drizzle is not typed safe query
+  - https://github.com/thetutlage/meta/discussions/8
+
+```sh
+bun add dotenv drizzle-orm mysql2
+bun add -D drizzle-kit tsx
+```
