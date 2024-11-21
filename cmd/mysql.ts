@@ -1,17 +1,15 @@
-import mysql from 'mysql2/promise'
-import { drizzle } from 'drizzle-orm/mysql2'
+import { connectMySQL, wrapMySQL } from '../src/mysql.ts'
 import { fruit as fruitTable } from '../src/db/schema'
 
-const conn = await mysql.createConnection({
-  host: 'localhost',
-  port: 3306,
-  user: 'root',
-  password: 'password',
-  database: 'demo',
+const conn = await connectMySQL({
+  host: process.env.MYSQL_HOST ?? '',
+  port: parseInt(process.env.MYSQL_PORT ?? ''),
+  username: process.env.MYSQL_USERNAME ?? '',
+  password: process.env.MYSQL_PASSWORD ?? '',
+  database: process.env.MYSQL_DATABASE ?? '',
 })
-console.info('👉 DB connected')
 
-const db = drizzle({ client: conn })
+const db = wrapMySQL(conn)
 
 const fruit: typeof fruitTable.$inferInsert = {
   name: 'apple',
