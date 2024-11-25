@@ -20,13 +20,24 @@ export function wrapMySQL(conn: Connection): MySql2Database {
   return drizzle({ client: conn })
 }
 
+/**
+ * Inserts a single fruit into the database.
+ * $returningId() does not work as expected.
+ */
 export async function insertFruit(db: MySql2Database, fruit: FruitInsert): Promise<void> {
-  await db.insert(fruitTable).values(fruit)
-  console.info('👉 Inserted a fruit:', fruit)
+  const result = await db.insert(fruitTable).values(fruit).$returningId()
+  console.info('👉 Inserted a fruit, result:', result)
+}
+
+/**
+ * Inserts multiple fruits into the database.
+ * $returningId() does not work as expected.
+ */
+export async function insertFruits(db: MySql2Database, fruits: FruitInsert[]): Promise<void> {
+  const result = await db.insert(fruitTable).values(fruits).$returningId()
+  console.info('👉 Inserted fruits, result:', result)
 }
 
 export async function listFruits(db: MySql2Database): Promise<FruitInsert[]> {
-  const rows = await db.select().from(fruitTable)
-  console.info('👉 All fruits:', rows)
-  return rows
+  return db.select().from(fruitTable)
 }

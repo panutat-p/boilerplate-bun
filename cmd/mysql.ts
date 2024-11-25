@@ -1,4 +1,4 @@
-import { connectMySQL, insertFruit, listFruits, wrapMySQL } from '../src/mysql.ts'
+import { connectMySQL, insertFruit, insertFruits, listFruits, wrapMySQL } from '../src/mysql.ts'
 import { fruit as fruitTable } from '../src/db/schema'
 
 const conn = await connectMySQL({
@@ -11,13 +11,18 @@ const conn = await connectMySQL({
 
 const db = wrapMySQL(conn)
 
-const fruit: typeof fruitTable.$inferInsert = {
-  name: 'apple',
-  color: 'red',
-  quantity: 4,
-}
+// const fruit: typeof fruitTable.$inferInsert = {
+//   name: 'apple',
+//   color: 'red',
+//   quantity: 4,
+// }
+//
+// await insertFruit(db, fruit)
 
-await insertFruit(db, fruit)
+await insertFruits(db, [
+  { name: 'banana', color: 'yellow', quantity: 3 },
+  { name: 'cherry', color: 'red', quantity: 7 },
+])
 
 const rows = await listFruits(db)
 console.info('👉 All fruits:', rows)
