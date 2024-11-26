@@ -11,14 +11,6 @@ const conn = await connectMySQL({
 
 const db = wrapMySQL(conn)
 
-// const fruit: typeof fruitTable.$inferInsert = {
-//   name: 'apple',
-//   color: 'red',
-//   quantity: 4,
-// }
-//
-// await insertFruit(db, fruit)
-
 await insertFruits(db, [
   { name: 'banana', color: 'yellow', quantity: 3 },
   { name: 'cherry', color: 'red', quantity: 7 },
