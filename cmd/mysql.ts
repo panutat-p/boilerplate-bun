@@ -1,5 +1,4 @@
-import { connectMySQL, insertFruit, insertFruits, listFruits, wrapMySQL } from '../src/mysql.ts'
-import { fruit as fruitTable } from '../src/db/schema'
+import { connectMySQL, insertFruits, listFruits, wrapMySQL } from '../src/mysql.ts'
 
 const conn = await connectMySQL({
   host: process.env.MYSQL_HOST ?? '',
