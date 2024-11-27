@@ -3,6 +3,7 @@ import { drizzle, type MySql2Database } from 'drizzle-orm/mysql2'
 import { fruit as fruitTable } from './db/schema'
 import type { Config } from './config.ts'
 import type { FruitInsert } from './types.ts'
+import { eq } from 'drizzle-orm/sql/expressions/conditions'
 
 export async function connectMySQL(conf: Config): Promise<Connection> {
   const conn = await mysql.createConnection({
@@ -40,4 +41,8 @@ export async function insertFruits(db: MySql2Database, fruits: FruitInsert[]): P
 
 export async function listFruits(db: MySql2Database): Promise<FruitInsert[]> {
   return db.select().from(fruitTable)
+}
+
+export async function updateFruitColor(db: MySql2Database, id: number, color: string): Promise<void> {
+  await db.update(fruitTable).set({ color: color }).where(eq(fruitTable.id, id))
 }

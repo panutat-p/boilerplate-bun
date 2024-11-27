@@ -1,4 +1,4 @@
-import { connectMySQL, insertFruits, listFruits, wrapMySQL } from '../src/mysql.ts'
+import { connectMySQL, insertFruits, listFruits, updateFruitColor, wrapMySQL } from '../src/mysql.ts'
 
 const conn = await connectMySQL({
   host: process.env.MYSQL_HOST ?? '',
@@ -14,6 +14,8 @@ await insertFruits(db, [
   { name: 'banana', color: 'yellow', quantity: 3 },
   { name: 'cherry', color: 'red', quantity: 7 },
 ])
+
+await updateFruitColor(db, 1, 'green')
 
 const rows = await listFruits(db)
 console.info('👉 All fruits:', rows)
