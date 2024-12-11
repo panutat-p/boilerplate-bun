@@ -42,3 +42,11 @@ bun add -D drizzle-kit
 bun add dotenv drizzle-orm mysql2
 bun add -D drizzle-kit tsx
 ```
+
+## Faker
+
+https://fakerjs.dev/guide
+
+```sh
+bun add @faker-js/faker
+```
