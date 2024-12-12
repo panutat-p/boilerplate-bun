@@ -50,3 +50,7 @@ https://fakerjs.dev/guide
 ```sh
 bun add @faker-js/faker
 ```
+
+## Zod Validation
+
+https://zod.dev
