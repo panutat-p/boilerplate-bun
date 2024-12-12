@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod'
 
 export function validateIdentityNo(no: string): string {
   const schema = z.string().length(13)
