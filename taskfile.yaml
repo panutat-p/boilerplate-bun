@@ -18,6 +18,10 @@ tasks:
     cmds:
       - bun run cmd/main.ts
 
+  serve:
+    cmds:
+      - bun run cmd/serve.ts
+
   mysql:
     cmds:
       - bun run cmd/mysql.ts
