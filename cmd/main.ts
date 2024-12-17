@@ -1,4 +1,5 @@
 import { randomFullNameEn } from '../src/faker'
+import { getUsers } from '../src/http'
 import { ksuid } from '../src/ksuid'
 import { now } from '../src/luxon'
 import { validateIdentityNo } from '../src/zod'
@@ -23,5 +24,10 @@ for (let i = 0; i < 10; i++) {
 
 console.info()
 
-var b = validateIdentityNo('10000000000001')
+var b = validateIdentityNo('1000000000001')
 console.info('b:', b)
+
+console.info()
+
+const users = await getUsers()
+console.info('users:', users)
