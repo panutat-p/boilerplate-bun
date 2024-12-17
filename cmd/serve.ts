@@ -1,7 +1,7 @@
 import { health, getFruits, postFruits } from '../src/handler/http'
 
 const server = Bun.serve({
-  port: 8080,
+  port: process.env.PORT,
   hostname: '0.0.0.0', // localhost
 
   async fetch(req, server) {

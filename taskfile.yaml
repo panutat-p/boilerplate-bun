@@ -21,6 +21,8 @@ tasks:
   serve:
     cmds:
       - bun run cmd/serve.ts
+    env:
+      PORT: 4000
 
   mysql:
     cmds:
