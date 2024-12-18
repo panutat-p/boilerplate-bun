@@ -33,3 +33,13 @@ tasks:
       MYSQL_USERNAME: root
       MYSQL_PASSWORD: password
       MYSQL_DATABASE: demo
+
+  redis:
+    cmds:
+      - bun run cmd/redis.ts
+    env:
+      REDIS_HOST: localhost
+      REDIS_PORT: 6379
+      REDIS_USERNAME: root
+      REDIS_PASSWORD: 1234
+      REDIS_DATABASE: 0

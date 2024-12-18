@@ -32,6 +32,15 @@ bun add -D drizzle-kit
 - https://github.com/knex/knex
 - https://github.com/kysely-org/kysely
 
+## Redis
+
+- https://redis.js.org
+- https://www.npmjs.com/package/redis
+
+```sh
+bun add redis
+```
+
 ## Drizzle
 
 - https://orm.drizzle.team/docs/get-started/mysql-existing
