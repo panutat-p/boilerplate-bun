@@ -7,7 +7,7 @@
     "@types/luxon": "^3.4.2",
     "dotenv": "^16.4.7",
     "drizzle-kit": "^0.28.1",
-    "tsx": "^4.19.2"
+    "tsx": "^4.19.3"
   },
   "peerDependencies": {
     "typescript": "^5.6.3"
