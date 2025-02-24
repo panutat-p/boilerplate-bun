@@ -19,6 +19,16 @@ tasks:
       - bun run cmd/main.ts
     env:
       PORT: 4001
+      MYSQL_HOST: localhost
+      MYSQL_PORT: 3306
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: demo
+      REDIS_HOST: localhost
+      REDIS_PORT: 6379
+      REDIS_USERNAME: root
+      REDIS_PASSWORD: 1234
+      REDIS_DATABASE: 0
 
   mysql:
     cmds:

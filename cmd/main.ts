@@ -1,8 +1,8 @@
 import { Elysia } from 'elysia'
 import { getFruits, health } from '../src/handler/handler'
-import type { Config } from '../config/config'
+import { ConfigSchema, type Config } from '../config/config'
 
-const conf: Config = {
+const conf = ConfigSchema.parse({
   server: {
     port: parseInt(Bun.env.PORT!),
   },
@@ -20,7 +20,7 @@ const conf: Config = {
     password: Bun.env.REDIS_PASSWORD!,
     database: Bun.env.REDIS_DATABASE!,
   },
-}
+}) satisfies Config
 
 const e = new Elysia()
 
