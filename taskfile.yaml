@@ -17,12 +17,8 @@ tasks:
   dev:
     cmds:
       - bun run cmd/main.ts
-
-  serve:
-    cmds:
-      - bun run cmd/serve.ts
     env:
-      PORT: 4000
+      PORT: 4001
 
   mysql:
     cmds:

@@ -1,33 +1,34 @@
-import { randomFullNameEn } from '../src/faker'
-import { getUsers } from '../src/http'
-import { ksuid } from '../src/ksuid'
-import { now } from '../src/luxon'
-import { validateIdentityNo } from '../src/zod'
+import { Elysia } from 'elysia'
+import { getFruits, health } from '../src/handler/handler'
+import type { Config } from '../config/config'
 
-console.info(now())
-
-for (let i = 0; i < 2; i++) {
-  console.info('now:', ksuid())
+const conf: Config = {
+  server: {
+    port: parseInt(Bun.env.PORT!),
+  },
+  mysql: {
+    host: Bun.env.MYSQL_HOST!,
+    port: parseInt(Bun.env.MYSQL_PORT!),
+    username: Bun.env.MYSQL_USERNAME!,
+    password: Bun.env.MYSQL_PASSWORD!,
+    database: Bun.env.MYSQL_DATABASE!,
+  },
+  redis: {
+    host: Bun.env.REDIS_HOST!,
+    port: parseInt(Bun.env.REDIS_PORT!),
+    username: Bun.env.REDIS_USERNAME!,
+    password: Bun.env.REDIS_PASSWORD!,
+    database: Bun.env.REDIS_DATABASE!,
+  },
 }
 
-console.info()
+const e = new Elysia()
 
-for (let i = 0; i < 10; i++) {
-  console.info('ksuid:', ksuid())
-}
+e.get('/', health)
+e.get('/health', health)
+e.get('/fruits', getFruits)
 
-console.info()
+e.listen(conf.server.port)
 
-for (let i = 0; i < 10; i++) {
-  console.info(randomFullNameEn())
-}
-
-console.info()
-
-var b = validateIdentityNo('1000000000001')
-console.info('b:', b)
-
-console.info()
-
-const users = await getUsers()
-console.info('users:', users)
+console.info(`Listening on ${conf.server.port}`)
+console.info(`http://localhost:${conf.server.port}`)

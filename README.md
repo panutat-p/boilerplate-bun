@@ -16,6 +16,7 @@ curl -fsSL https://bun.sh/install | bash
 
 - https://bun.sh/docs/cli/init
 - https://bun.sh/docs/cli/add
+- https://elysiajs.com/tutorial.html
 
 ## Packages
 

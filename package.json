@@ -15,6 +15,7 @@
   "dependencies": {
     "@faker-js/faker": "^9.5.0",
     "drizzle-orm": "^0.36.4",
+    "elysia": "^1.2.22",
     "ksuid": "^3.0.0",
     "luxon": "^3.5.0",
     "mysql2": "^3.12.0",
