@@ -1,4 +1,4 @@
-import { Elysia } from 'elysia'
+import { Elysia, t } from 'elysia'
 import { randomFullNameEn, randomEmail } from '../lib/faker'
 
 type Customer = {
@@ -36,94 +36,131 @@ const customerController = new Elysia()
     return customers
   })
 
-  .get('/customers/:id', ({ params, error }) => {
-    const id = parseInt(params.id)
-    if (isNaN(id)) {
-      return error(400, { error: 'Invalid ID format' })
+  .get(
+    '/customers/:id',
+    ({ params: { id }, error }) => {
+      const customer = customers.find((customer) => customer.id === id)
+
+      if (!customer) {
+        return error(404, {
+          error: 'Customer not found',
+        })
+      }
+
+      return customer
+    },
+    {
+      params: t.Object({
+        id: t.Number({
+          error() {
+            return { error: `Invalid param 'id'` }
+          },
+        }),
+      }),
     }
+  )
 
-    const customer = customers.find((customer) => customer.id === id)
+  .post(
+    '/customers',
+    ({ body, set, error }) => {
+      const req = body as Customer
 
-    if (!customer) {
-      return error(404, {
-        error: 'Customer not found',
+      customers.push({
+        id: customers.length + 1,
+        name: req.name,
+        email: req.email,
       })
+
+      set.status = 201
+      return {
+        message: 'Customer created',
+      }
+    },
+    {
+      body: t.Object({
+        name: t.String({
+          error() {
+            return { error: `Invalid body, 'name'` }
+          },
+        }),
+        email: t.String({
+          error() {
+            return { error: `Invalid body, 'email'` }
+          },
+        }),
+      }),
     }
+  )
 
-    return customer
-  })
+  .patch(
+    '/customers/:id',
+    ({ params: { id }, body, error }) => {
+      const req = body as Customer
 
-  .post('/customers', ({ body, set, error }) => {
-    const req = body as Customer
+      const customer = customers.find((customer) => customer.id === id)
 
-    if (!req.name || typeof req.name !== 'string') {
-      return error(400, { error: 'Name is required and must be a string' })
+      if (!customer) {
+        return error(404, {
+          error: 'Customer not found',
+        })
+      }
+
+      customer.name = req.name
+      customer.email = req.email
+
+      return {
+        message: 'Customer updated',
+      }
+    },
+    {
+      params: t.Object({
+        id: t.Number({
+          error() {
+            return { error: `Invalid param 'id'` }
+          },
+        }),
+      }),
+      body: t.Object({
+        name: t.String({
+          error() {
+            return { error: `Invalid body, 'name'` }
+          },
+        }),
+        email: t.String({
+          error() {
+            return { error: `Invalid body, 'email'` }
+          },
+        }),
+      }),
     }
-    if (!req.email || typeof req.email !== 'string') {
-      return error(400, { error: 'Email is required and must be a string' })
+  )
+
+  .delete(
+    '/customers/:id',
+    ({ params: { id }, error }) => {
+      const index = customers.findIndex((customer) => customer.id === id)
+
+      if (index === -1) {
+        return error(404, {
+          error: 'Customer not found',
+        })
+      }
+
+      customers.splice(index, 1)
+
+      return {
+        message: 'Customer deleted',
+      }
+    },
+    {
+      params: t.Object({
+        id: t.Number({
+          error() {
+            return { error: `Invalid param 'id'` }
+          },
+        }),
+      }),
     }
-
-    customers.push({
-      id: customers.length + 1,
-      name: req.name,
-      email: req.email,
-    })
-
-    set.status = 201
-    return {
-      message: 'Customer created',
-    }
-  })
-
-  .patch('/customers/:id', ({ params, body, error }) => {
-    const id = parseInt(params.id)
-    if (isNaN(id)) {
-      return error(400, { error: 'Invalid ID format' })
-    }
-
-    const req = body as Customer
-    if (!req.name || typeof req.name !== 'string') {
-      return error(400, { error: 'Name is required and must be a string' })
-    }
-    if (!req.email || typeof req.email !== 'string') {
-      return error(400, { error: 'Email is required and must be a string' })
-    }
-
-    const customer = customers.find((customer) => customer.id === id)
-
-    if (!customer) {
-      return error(404, {
-        error: 'Customer not found',
-      })
-    }
-
-    customer.name = req.name
-    customer.email = req.email
-
-    return {
-      message: 'Customer updated',
-    }
-  })
-
-  .delete('/customers/:id', ({ params, error }) => {
-    const id = parseInt(params.id)
-    if (isNaN(id)) {
-      return error(400, { error: 'Invalid ID format' })
-    }
-
-    const index = customers.findIndex((customer) => customer.id === id)
-
-    if (index === -1) {
-      return error(404, {
-        error: 'Customer not found',
-      })
-    }
-
-    customers.splice(index, 1)
-
-    return {
-      message: 'Customer deleted',
-    }
-  })
+  )
 
 export default customerController

@@ -43,10 +43,6 @@ export async function listFruits(db: MySql2Database): Promise<FruitInsert[]> {
   return db.select().from(fruitTable)
 }
 
-export async function updateFruitColor(
-  db: MySql2Database,
-  id: number,
-  color: string
-): Promise<void> {
+export async function updateFruitColor(db: MySql2Database, id: number, color: string): Promise<void> {
   await db.update(fruitTable).set({ color: color }).where(eq(fruitTable.id, id))
 }
