@@ -22,12 +22,7 @@ const conf = ConfigSchema.parse({
   },
 }) satisfies Config
 
-new Elysia()
-  .get('/', health)
-  .get('/health', health)
-  .get('/fruits', getFruits)
-  .use(customerController)
-  .listen(conf.server.port)
+new Elysia().get('/', health).get('/health', health).use(customerController).listen(conf.server.port)
 
 console.info(`Listening on ${conf.server.port}`)
 console.info(`http://localhost:${conf.server.port}`)

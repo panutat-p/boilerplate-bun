@@ -3,9 +3,3 @@ export function health() {
     status: 'OK',
   }
 }
-
-export function getFruits() {
-  return {
-    data: ['apple', 'banana', 'cherry', 'date', 'elderberry', 'fig', 'grape'],
-  }
-}

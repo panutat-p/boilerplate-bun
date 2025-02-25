@@ -1,7 +1,13 @@
 import { Elysia } from 'elysia'
 import { randomFullNameEn, randomEmail } from '../faker'
 
-const customers = [
+type Customer = {
+  id: number
+  name: string
+  email: string
+}
+
+const customers: Customer[] = [
   {
     id: 1,
     name: randomFullNameEn(),
@@ -32,6 +38,10 @@ const customerController = new Elysia()
 
   .get('/customers/:id', ({ params, error }) => {
     const id = parseInt(params.id)
+    if (isNaN(id)) {
+      return error(400, { error: 'Invalid ID format' })
+    }
+
     const customer = customers.find((customer) => customer.id === id)
 
     if (!customer) {
@@ -41,6 +51,73 @@ const customerController = new Elysia()
     }
 
     return customer
+  })
+
+  .post('/customers', ({ body, error }) => {
+    const req = body as Customer
+
+    if (!req.name || typeof req.name !== 'string') {
+      return error(400, { error: 'Name is required and must be a string' })
+    }
+    if (!req.email || typeof req.email !== 'string') {
+      return error(400, { error: 'Email is required and must be a string' })
+    }
+
+    customers.push({
+      id: customers.length + 1,
+      name: req.name,
+      email: req.email,
+    })
+    return req
+  })
+
+  .patch('/customers/:id', ({ params, body, error }) => {
+    const id = parseInt(params.id)
+    if (isNaN(id)) {
+      return error(400, { error: 'Invalid ID format' })
+    }
+
+    const req = body as Customer
+    if (!req.name || typeof req.name !== 'string') {
+      return error(400, { error: 'Name is required and must be a string' })
+    }
+    if (!req.email || typeof req.email !== 'string') {
+      return error(400, { error: 'Email is required and must be a string' })
+    }
+
+    const customer = customers.find((customer) => customer.id === id)
+
+    if (!customer) {
+      return error(404, {
+        error: 'Customer not found',
+      })
+    }
+
+    customer.name = req.name
+    customer.email = req.email
+
+    return customer
+  })
+
+  .delete('/customers/:id', ({ params, error }) => {
+    const id = parseInt(params.id)
+    if (isNaN(id)) {
+      return error(400, { error: 'Invalid ID format' })
+    }
+
+    const index = customers.findIndex((customer) => customer.id === id)
+
+    if (index === -1) {
+      return error(404, {
+        error: 'Customer not found',
+      })
+    }
+
+    customers.splice(index, 1)
+
+    return {
+      message: 'Customer deleted successfully',
+    }
   })
 
 export default customerController
