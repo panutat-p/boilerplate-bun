@@ -11,7 +11,9 @@ export const fruit = mysqlTable(
     updatedAt: timestamp('updated_at', { fsp: 6, mode: 'string' })
       .default(sql`(CURRENT_TIMESTAMP(6))`)
       .onUpdateNow(),
-    createdAt: timestamp('created_at', { fsp: 6, mode: 'string' }).default(sql`(CURRENT_TIMESTAMP(6))`),
+    createdAt: timestamp('created_at', { fsp: 6, mode: 'string' }).default(
+      sql`(CURRENT_TIMESTAMP(6))`
+    ),
   },
   (table) => {
     return {

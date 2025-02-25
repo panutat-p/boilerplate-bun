@@ -1,5 +1,5 @@
 import { Elysia } from 'elysia'
-import { getFruits, health } from '../src/handler/handler'
+import { health } from '../src/handler/handler'
 import { ConfigSchema, type Config } from '../config/config'
 import customerController from '../src/controller/customer'
 const conf = ConfigSchema.parse({
@@ -22,7 +22,11 @@ const conf = ConfigSchema.parse({
   },
 }) satisfies Config
 
-new Elysia().get('/', health).get('/health', health).use(customerController).listen(conf.server.port)
+new Elysia({ prefix: '/api' })
+  .get('/', health)
+  .get('/health', health)
+  .use(customerController)
+  .listen(conf.server.port)
 
 console.info(`Listening on ${conf.server.port}`)
 console.info(`http://localhost:${conf.server.port}`)
