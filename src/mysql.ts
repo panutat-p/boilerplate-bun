@@ -7,11 +7,11 @@ import type { FruitInsert } from './types.ts'
 
 export async function connectMySQL(conf: Config): Promise<Connection> {
   const conn = await mysql.createConnection({
-    host: conf.host,
-    port: conf.port,
-    user: conf.username,
-    password: conf.password,
-    database: conf.database,
+    host: conf.mysql.host,
+    port: conf.mysql.port,
+    user: conf.mysql.username,
+    password: conf.mysql.password,
+    database: conf.mysql.database,
   })
   console.info('👉 DB connected')
   return conn
