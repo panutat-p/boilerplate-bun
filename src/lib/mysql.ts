@@ -1,8 +1,8 @@
 import mysql, { type Connection } from 'mysql2/promise'
 import { drizzle, type MySql2Database } from 'drizzle-orm/mysql2'
-import { fruit as fruitTable } from './db/schema'
+import { fruit as fruitTable } from '../db/schema.ts'
 import { eq } from 'drizzle-orm/sql/expressions/conditions'
-import type { Config } from '../config/config.ts'
+import type { Config } from '../../config/config.ts'
 import type { FruitInsert } from './types.ts'
 
 export async function connectMySQL(conf: Config): Promise<Connection> {

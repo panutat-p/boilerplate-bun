@@ -1,5 +1,5 @@
 import { Elysia } from 'elysia'
-import { randomFullNameEn, randomEmail } from '../faker'
+import { randomFullNameEn, randomEmail } from '../lib/faker'
 
 type Customer = {
   id: number
