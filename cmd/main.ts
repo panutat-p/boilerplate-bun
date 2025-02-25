@@ -1,7 +1,7 @@
 import { Elysia } from 'elysia'
 import { getFruits, health } from '../src/handler/handler'
 import { ConfigSchema, type Config } from '../config/config'
-
+import customerController from '../src/controller/customer'
 const conf = ConfigSchema.parse({
   server: {
     port: parseInt(Bun.env.PORT!),
@@ -27,6 +27,7 @@ const e = new Elysia()
 e.get('/', health)
 e.get('/health', health)
 e.get('/fruits', getFruits)
+e.use(customerController)
 
 e.listen(conf.server.port)
 
