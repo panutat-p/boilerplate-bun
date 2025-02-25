@@ -30,15 +30,14 @@ const customerController = new Elysia()
     return customers
   })
 
-  .get('/customers/:id', ({ params, set }) => {
+  .get('/customers/:id', ({ params, error }) => {
     const id = parseInt(params.id)
     const customer = customers.find((customer) => customer.id === id)
 
     if (!customer) {
-      set.status = 404
-      return {
+      return error(404, {
         error: 'Customer not found',
-      }
+      })
     }
 
     return customer
