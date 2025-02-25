@@ -1,4 +1,5 @@
 import { Elysia } from 'elysia'
+import { swagger } from '@elysiajs/swagger'
 import { health } from '../src/handler/handler'
 import { ConfigSchema, type Config } from '../config/config'
 import customerController from '../src/controller/customer'
@@ -23,10 +24,22 @@ const conf = ConfigSchema.parse({
 }) satisfies Config
 
 new Elysia({ prefix: '/api' })
+  .onError(({ code, error, set }) => {
+    if (code === 'NOT_FOUND') {
+      set.status = 404
+      return {
+        error: 'Not Found',
+      }
+    }
+  })
+  .use(swagger())
   .get('/', health)
   .get('/health', health)
+  .get('/ip', ({ server, request }) => {
+    return server?.requestIP(request)
+  })
   .use(customerController)
   .listen(conf.server.port)
 
 console.info(`Listening on ${conf.server.port}`)
-console.info(`http://localhost:${conf.server.port}`)
+console.info(`http://localhost:${conf.server.port}/api/swagger`)

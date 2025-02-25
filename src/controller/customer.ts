@@ -53,7 +53,7 @@ const customerController = new Elysia()
     return customer
   })
 
-  .post('/customers', ({ body, error }) => {
+  .post('/customers', ({ body, set, error }) => {
     const req = body as Customer
 
     if (!req.name || typeof req.name !== 'string') {
@@ -68,7 +68,11 @@ const customerController = new Elysia()
       name: req.name,
       email: req.email,
     })
-    return req
+
+    set.status = 201
+    return {
+      message: 'Customer created',
+    }
   })
 
   .patch('/customers/:id', ({ params, body, error }) => {
@@ -96,7 +100,9 @@ const customerController = new Elysia()
     customer.name = req.name
     customer.email = req.email
 
-    return customer
+    return {
+      message: 'Customer updated',
+    }
   })
 
   .delete('/customers/:id', ({ params, error }) => {
@@ -116,7 +122,7 @@ const customerController = new Elysia()
     customers.splice(index, 1)
 
     return {
-      message: 'Customer deleted successfully',
+      message: 'Customer deleted',
     }
   })
 
