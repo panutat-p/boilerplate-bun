@@ -3,6 +3,8 @@ import { swagger } from '@elysiajs/swagger'
 import { health } from '../src/handler/handler'
 import { ConfigSchema, type Config } from '../config/config'
 import customerController from '../src/controller/customer'
+import authController from '../src/controller/auth'
+
 const conf = ConfigSchema.parse({
   server: {
     port: parseInt(Bun.env.PORT!),
@@ -50,6 +52,7 @@ new Elysia({ prefix: '/api' })
   .get('/ip', ({ server, request }) => {
     return server?.requestIP(request)
   })
+  .use(authController)
   .use(customerController)
   .listen(conf.server.port)
 
