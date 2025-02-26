@@ -52,9 +52,7 @@ const customerController = new Elysia()
     {
       params: t.Object({
         id: t.Number({
-          error() {
-            return `Invalid param 'id'`
-          },
+          error: () => `Invalid param 'id'`,
         }),
       }),
     }
@@ -79,14 +77,10 @@ const customerController = new Elysia()
     {
       body: t.Object({
         name: t.String({
-          error() {
-            return `Invalid body, 'name'`
-          },
+          error: () => `Invalid body, 'name'`,
         }),
         email: t.String({
-          error() {
-            return `Invalid body, 'email'`
-          },
+          error: () => `Invalid body, 'email'`,
         }),
       }),
     }
@@ -115,21 +109,15 @@ const customerController = new Elysia()
     {
       params: t.Object({
         id: t.Number({
-          error() {
-            return `Invalid param 'id'`
-          },
+          error: () => `Invalid param 'id'`,
         }),
       }),
       body: t.Object({
         name: t.String({
-          error() {
-            return `Invalid body, 'name'`
-          },
+          error: () => `Invalid body, 'name'`,
         }),
         email: t.String({
-          error() {
-            return `Invalid body, 'email'`
-          },
+          error: () => `Invalid body, 'email'`,
         }),
       }),
     }
@@ -155,9 +143,7 @@ const customerController = new Elysia()
     {
       params: t.Object({
         id: t.Number({
-          error() {
-            return `Invalid param 'id'`
-          },
+          error: () => `Invalid param 'id'`,
         }),
       }),
     }
