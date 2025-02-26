@@ -9,6 +9,13 @@ const conf = ConfigSchema.parse({
   server: {
     port: parseInt(Bun.env.PORT!),
   },
+  postgres: {
+    host: Bun.env.POSTGRES_HOST!,
+    port: parseInt(Bun.env.POSTGRES_PORT!),
+    username: Bun.env.POSTGRES_USERNAME!,
+    password: Bun.env.POSTGRES_PASSWORD!,
+    database: Bun.env.POSTGRES_DATABASE!,
+  },
   mysql: {
     host: Bun.env.MYSQL_HOST!,
     port: parseInt(Bun.env.MYSQL_PORT!),

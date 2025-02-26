@@ -19,6 +19,11 @@ tasks:
       - bun run cmd/main.ts
     env:
       PORT: 4001
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5432
+      POSTGRES_USERNAME: admin
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DATABASE: demo
       MYSQL_HOST: localhost
       MYSQL_PORT: 3306
       MYSQL_USERNAME: root
