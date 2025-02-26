@@ -25,11 +25,23 @@ const conf = ConfigSchema.parse({
 
 new Elysia({ prefix: '/api' })
   .onError(({ code, error, set }) => {
-    if (code === 'NOT_FOUND') {
-      set.status = 404
-      return {
-        error: 'Not Found',
-      }
+    // catch throw error from controller
+    switch (code) {
+      case 'NOT_FOUND':
+        set.status = 404
+        return {
+          error: 'Not Found',
+        }
+      case 'VALIDATION':
+        set.status = 400
+        return {
+          error: error.message,
+        }
+      default:
+        set.status = 500
+        return {
+          error: error,
+        }
     }
   })
   .use(swagger())
