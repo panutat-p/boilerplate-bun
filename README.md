@@ -12,10 +12,15 @@ brew install oven-sh/bun/bun
 curl -fsSL https://bun.sh/install | bash
 ```
 
+## Ake
+
+- https://gitlab.com/codingthailand/elysia-app
+
 ## Docs
 
 - https://bun.sh/docs/cli/init
 - https://bun.sh/docs/cli/add
+- https://bun.sh/docs/api/sql
 - https://elysiajs.com/essential/structure
 - https://elysiajs.com/essential/handler
 
