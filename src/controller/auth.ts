@@ -1,15 +1,25 @@
 import { Elysia, error, t } from 'elysia'
 import { authModel } from '../model/auth'
-
+import { logIn, register } from '../service/auth'
+import { randomFullNameEn } from '../lib/faker'
 const authController = new Elysia()
 
   .use(authModel)
 
   .post(
     '/register',
-    ({ body }) => {
+    async ({ body }) => {
       console.info(body.email)
       console.info(body.password)
+
+      const result = await register(randomFullNameEn(), body.email, body.password)
+
+      if (result.error) {
+        return error(400, {
+          error: result.error,
+        })
+      }
+
       return {
         message: 'Register successful',
       }
@@ -31,7 +41,15 @@ const authController = new Elysia()
 
   .post(
     '/login',
-    ({ body }) => {
+    async ({ body }) => {
+      const result = await logIn(body.email, body.password)
+
+      if (result.error) {
+        return error(400, {
+          error: result.error,
+        })
+      }
+
       return {
         message: 'Login successful',
       }
