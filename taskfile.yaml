@@ -36,6 +36,17 @@ tasks:
       REDIS_PASSWORD: 1234
       REDIS_DATABASE: 0
 
+  build:
+    cmds:
+      - |
+        bun build \
+        --compile \
+        --minify-whitespace \
+        --minify-syntax \
+        --target=bun-darwin-arm64 \
+        --outfile bin/app \
+        ./cmd/main.ts
+
   mysql:
     cmds:
       - bun run cmd/mysql.ts
