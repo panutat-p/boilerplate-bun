@@ -59,7 +59,16 @@ new Elysia({ prefix: '/api' })
   .use(staticPlugin({
     assets: 'public',
   }))
-  .use(swagger())
+  .use(
+    swagger({
+      documentation: {
+        info: {
+          title: 'Bun API',
+          version: '1.0.0',
+        },
+      },
+    })
+  )
   .get('/', health)
   .get('/health', health)
   .get('/ip', ({ server, request }) => {
