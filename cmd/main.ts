@@ -1,13 +1,14 @@
 import { Elysia } from 'elysia'
 import { swagger } from '@elysiajs/swagger'
 import { health } from '../src/handler/handler'
-import { ConfigSchema, type Config } from '../config/config'
-import customerController from '../src/controller/customer'
-import authController from '../src/controller/auth'
 import cors from '@elysiajs/cors'
 import staticPlugin from '@elysiajs/static'
 import { logger } from '@bogeychan/elysia-logger'
 import { jwt } from '@elysiajs/jwt'
+import { ConfigSchema, type Config } from '../config/config'
+import authController from '../src/controller/auth'
+import customerController from '../src/controller/customer'
+import uploadController from '../src/controller/upload'
 
 const conf = ConfigSchema.parse({
   server: {
@@ -95,6 +96,7 @@ new Elysia({ prefix: '/api' })
   })
   .use(authController)
   .use(customerController)
+  .use(uploadController)
   .listen(conf.server.port)
 
 console.info(`Listening on ${conf.server.port}`)

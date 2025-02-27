@@ -50,9 +50,9 @@ export async function logIn(email: string, password: string): Promise<ResultLogI
       return { error: 'Invalid Email or Password' }
     }
 
-    return { 
-        id: u.id,
-     }
+    return {
+      id: u.id,
+    }
   } catch (e) {
     throw new Error('User not found')
   }
