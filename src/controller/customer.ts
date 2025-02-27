@@ -1,4 +1,5 @@
 import { Elysia, t } from 'elysia'
+import { jwt } from '@elysiajs/jwt'
 import { randomFullNameEn, randomEmail } from '../lib/faker'
 
 type Customer = {
@@ -31,6 +32,13 @@ const customers: Customer[] = [
 ]
 
 const customerController = new Elysia()
+
+  .use(
+    jwt({
+      name: 'jwt',
+      secret: 'secret',
+    })
+  )
 
   .get('/customers', () => {
     return customers

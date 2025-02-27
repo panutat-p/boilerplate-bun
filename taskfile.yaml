@@ -19,6 +19,7 @@ tasks:
       - bun run cmd/main.ts
     env:
       PORT: 4001
+      JWT_SECRET: secret
       POSTGRES_HOST: localhost
       POSTGRES_PORT: 5432
       POSTGRES_USERNAME: admin

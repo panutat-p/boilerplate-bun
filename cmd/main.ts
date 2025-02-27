@@ -7,10 +7,14 @@ import authController from '../src/controller/auth'
 import cors from '@elysiajs/cors'
 import staticPlugin from '@elysiajs/static'
 import { logger } from '@bogeychan/elysia-logger'
+import { jwt } from '@elysiajs/jwt'
 
 const conf = ConfigSchema.parse({
   server: {
     port: parseInt(Bun.env.PORT!),
+  },
+  jwt: {
+    secret: Bun.env.JWT_SECRET!,
   },
   postgres: {
     host: Bun.env.POSTGRES_HOST!,
@@ -76,6 +80,12 @@ new Elysia({ prefix: '/api' })
           version: '1.0.0',
         },
       },
+    })
+  )
+  .use(
+    jwt({
+      name: 'jwt',
+      secret: conf.jwt.secret,
     })
   )
   .get('/', health)

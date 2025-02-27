@@ -35,6 +35,7 @@ bun add -D drizzle-kit
 bun add @elysiajs/static
 bun add @elysiajs/cors
 bun add @bogeychan/elysia-logger
+bun add @elysiajs/jwt
 ```
 
 ## SQL

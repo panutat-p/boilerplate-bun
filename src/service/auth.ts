@@ -50,7 +50,9 @@ export async function logIn(email: string, password: string): Promise<ResultLogI
       return { error: 'Invalid Email or Password' }
     }
 
-    return { id: u.id }
+    return { 
+        id: u.id,
+     }
   } catch (e) {
     throw new Error('User not found')
   }
@@ -66,6 +68,9 @@ export async function register(name: string, email: string, password: string): P
   const newUser = { id: users.length + 1, name, email, password: hashedPassword }
   users.push(newUser)
 
-  console.info('all users:', users)
   return { id: newUser.id }
+}
+
+export async function getUserById(id: number): Promise<User | undefined> {
+  return users.find((u) => u.id === id)
 }

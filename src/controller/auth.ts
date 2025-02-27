@@ -1,8 +1,17 @@
-import { Elysia, error, t } from 'elysia'
+import { Elysia, error } from 'elysia'
+import { jwt } from '@elysiajs/jwt'
 import { authModel } from '../model/auth'
-import { logIn, register } from '../service/auth'
+import { logIn, register, getUserById } from '../service/auth'
 import { randomFullNameEn } from '../lib/faker'
 const authController = new Elysia()
+
+  .use(
+    jwt({
+      name: 'jwt',
+      secret: Bun.env.JWT_SECRET!,
+      exp: '2h',
+    })
+  )
 
   .use(authModel)
 
@@ -41,7 +50,7 @@ const authController = new Elysia()
 
   .post(
     '/login',
-    async ({ body }) => {
+    async ({ body, error, jwt }) => {
       const result = await logIn(body.email, body.password)
 
       if (result.error) {
@@ -50,8 +59,14 @@ const authController = new Elysia()
         })
       }
 
+      const token = await jwt.sign({
+        id: result.id!,
+        iss: 'Bun API',
+      })
+
       return {
         message: 'Login successful',
+        token: token,
       }
     },
     {
@@ -68,5 +83,33 @@ const authController = new Elysia()
     //   }),
     // }
   )
+
+  .get('/profile', async ({ error, jwt, headers: { authorization } }) => {
+    const token = authorization?.startsWith('Bearer ') ? authorization.slice(7) : undefined
+
+    if (!token) {
+      return error(401, {
+        error: 'Unauthorized',
+      })
+    }
+
+    const payload = await jwt.verify(token)
+    if (!payload) {
+      return error(401, {
+        error: 'Unauthorized',
+      })
+    }
+
+    const user = await getUserById(Number(payload.id))
+    if (!user) {
+      return error(500, {
+        error: 'User not found',
+      })
+    }
+
+    return {
+      user,
+    }
+  })
 
 export default authController
