@@ -6,6 +6,7 @@ import customerController from '../src/controller/customer'
 import authController from '../src/controller/auth'
 import cors from '@elysiajs/cors'
 import staticPlugin from '@elysiajs/static'
+import { logger } from '@bogeychan/elysia-logger'
 
 const conf = ConfigSchema.parse({
   server: {
@@ -56,9 +57,17 @@ new Elysia({ prefix: '/api' })
     }
   })
   .use(cors())
-  .use(staticPlugin({
-    assets: 'public',
-  }))
+  .use(
+    logger({
+      level: 'debug',
+      autoLogging: true,
+    })
+  )
+  .use(
+    staticPlugin({
+      assets: 'public',
+    })
+  )
   .use(
     swagger({
       documentation: {

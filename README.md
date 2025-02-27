@@ -23,6 +23,7 @@ curl -fsSL https://bun.sh/install | bash
 - https://bun.sh/docs/api/sql
 - https://elysiajs.com/essential/structure
 - https://elysiajs.com/essential/handler
+- https://github.com/bogeychan/elysia-logger
 
 ## Packages
 
@@ -31,6 +32,9 @@ bun add luxon
 bun add -D @types/luxon
 bun add drizzle-orm mysql2
 bun add -D drizzle-kit
+bun add @elysiajs/static
+bun add @elysiajs/cors
+bun add @bogeychan/elysia-logger
 ```
 
 ## SQL
