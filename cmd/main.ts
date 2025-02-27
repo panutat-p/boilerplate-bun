@@ -56,7 +56,9 @@ new Elysia({ prefix: '/api' })
     }
   })
   .use(cors())
-  .use(staticPlugin())
+  .use(staticPlugin({
+    assets: 'public',
+  }))
   .use(swagger())
   .get('/', health)
   .get('/health', health)
