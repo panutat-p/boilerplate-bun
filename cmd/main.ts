@@ -4,6 +4,8 @@ import { health } from '../src/handler/handler'
 import { ConfigSchema, type Config } from '../config/config'
 import customerController from '../src/controller/customer'
 import authController from '../src/controller/auth'
+import cors from '@elysiajs/cors'
+import staticPlugin from '@elysiajs/static'
 
 const conf = ConfigSchema.parse({
   server: {
@@ -53,6 +55,8 @@ new Elysia({ prefix: '/api' })
         }
     }
   })
+  .use(cors())
+  .use(staticPlugin())
   .use(swagger())
   .get('/', health)
   .get('/health', health)
