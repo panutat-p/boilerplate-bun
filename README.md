@@ -30,8 +30,6 @@ curl -fsSL https://bun.sh/install | bash
 ```sh
 bun add luxon
 bun add -D @types/luxon
-bun add drizzle-orm mysql2
-bun add -D drizzle-kit
 bun add @elysiajs/static
 bun add @elysiajs/cors
 bun add @bogeychan/elysia-logger
@@ -40,9 +38,21 @@ bun add @elysiajs/jwt
 
 ## SQL
 
-- https://github.com/drizzle-team/drizzle-orm
 - https://github.com/knex/knex
 - https://github.com/kysely-org/kysely
+
+## Drizzle
+
+* https://orm.drizzle.team/docs/get-started
+* https://hub.docker.com/_/postgres
+
+> Drizzle is not typed safe query
+> https://github.com/thetutlage/meta/discussions/8
+
+```sh
+bun add drizzle-orm pg dotenv
+bun add -D drizzle-kit tsx @types/pg
+```
 
 ## Redis
 
@@ -51,17 +61,6 @@ bun add @elysiajs/jwt
 
 ```sh
 bun add redis
-```
-
-## Drizzle
-
-- https://orm.drizzle.team/docs/get-started/mysql-existing
-- Drizzle is not typed safe query
-  - https://github.com/thetutlage/meta/discussions/8
-
-```sh
-bun add dotenv drizzle-orm mysql2
-bun add -D drizzle-kit tsx
 ```
 
 ## Faker
