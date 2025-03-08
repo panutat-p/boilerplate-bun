@@ -1,0 +1,18 @@
+---
+description: Sample Cursor rule for Bun
+globs: 
+alwaysApply: false
+---
+
+# Your rule content
+
+- You can @ files here
+- You can use markdown but dont have to
+
+@cmd/
+
+### ENV
+
+https://bun.sh/guides/runtime/read-env
+
+Use `Bun.env` instead of `process.env`
