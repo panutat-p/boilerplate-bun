@@ -1,0 +1,20 @@
+services:
+
+  postgres17:
+    image: 'postgres:17.4'
+    platform: linux/arm64
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 1234
+    volumes:
+      - type: volume
+        source: postgres17_data
+        target: /var/lib/postgresql/data
+    restart: unless-stopped
+
+
+volumes:
+  postgres17_data:
+    external: true
