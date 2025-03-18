@@ -20,12 +20,12 @@
     "@elysiajs/static": "^1.2.0",
     "@elysiajs/swagger": "^1.2.2",
     "@faker-js/faker": "^9.6.0",
-    "drizzle-orm": "^0.40.0",
+    "drizzle-orm": "^0.40.1",
     "elysia": "^1.2.25",
     "ksuid": "^3.0.0",
     "luxon": "^3.5.0",
     "mysql2": "^3.13.0",
-    "pg": "^8.13.3",
+    "pg": "^8.14.1",
     "redis": "^4.7.0",
     "zod": "^3.24.2"
   }
